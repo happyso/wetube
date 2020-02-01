@@ -5,9 +5,15 @@
   "main": "index.js",
   "author": "kim so young",
   "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "express": "^4.17.1"
   },
-  "scripts":{
-    "start" : "node index.js"
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js --delay 2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

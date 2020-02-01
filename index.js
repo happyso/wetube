@@ -1,4 +1,5 @@
-const express = require('express')
+import express from "express";
+
 const app = express();
 const PORT = 4000;
 
@@ -13,7 +14,15 @@ const handleHome = (req, res) => {
 const handleProfile = (req, res) =>{
     res.send("you are on my profile");
 }
-app.get('/', handleHome);
-app.get ("/profile",handleProfile)
+
+const betweenHome = (req, res, next) =>{
+    console.log('Between');
+    next();
+}
+
+app.use(betweenHome);
+app.get('/',  handleHome);
+app.get ("/profile", handleProfile);
+
  
 app.listen(PORT, handleListening);
