@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
 mongooes.connect(
     process.env.MONGO_URL,
     {
