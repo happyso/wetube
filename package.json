@@ -1,39 +1,52 @@
 {
-  "name": "wetube",
-  "version": "1.0.0",
-  "description": "cloning youtube vanilla and nodeJS",
-  "main": "index.js",
-  "author": "kim so young",
-  "dependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/node": "^7.8.4",
-    "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.8.4",
-    "autoprefixer": "^9.3.1",
-    "babel-loader": "^8.0.4",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "css-loader": "^1.0.1",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "helmet": "^3.21.2",
-    "mongoose": "^5.8.11",
-    "morgan": "^1.9.1",
-    "multer": "^1.4.2",
-    "node-sass": "^4.10.0",
-    "postcss-loader": "^3.0.0",
-    "pug": "^2.0.4",
-    "sass-loader": "^7.1.0",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
-  },
-  "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2",
-    "dev:assets": "WEBPACK_ENV=development webpack -w",
-    "build:assets": "WEBPACK_ENV=production webpack"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+    "name": "wetube",
+    "version": "1.0.0",
+    "description": "cloning youtube vanilla and nodeJS",
+    "main": "index.js",
+    "author": "kim so young",
+    "dependencies": {
+        "@babel/core": "^7.8.4",
+        "@babel/node": "^7.8.4",
+        "@babel/polyfill": "^7.0.0",
+        "@babel/preset-env": "^7.8.4",
+        "autoprefixer": "^9.3.1",
+        "babel-loader": "^8.0.4",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.4",
+        "css-loader": "^1.0.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "extract-text-webpack-plugin": "^4.0.0-beta.0",
+        "helmet": "^3.21.2",
+        "mongoose": "^5.8.11",
+        "morgan": "^1.9.1",
+        "multer": "^1.4.2",
+        "node-sass": "^4.10.0",
+        "postcss-loader": "^3.0.0",
+        "pug": "^2.0.4",
+        "sass-loader": "^7.1.0",
+        "webpack": "^4.42.0",
+        "webpack-cli": "^3.3.11"
+    },
+    "scripts": {
+        "dev:server": "nodemon --exec babel-node init.js --delay 2",
+        "dev:assets": "WEBPACK_ENV=development webpack -w",
+        "build:assets": "WEBPACK_ENV=production webpack"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version",
+            "last 1 ie version"
+        ]
+    }
 }
