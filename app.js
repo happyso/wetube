@@ -14,22 +14,22 @@ import routes from './routes';
 
 const app = express();
 
-app.use(helmet());
-app.set('view engine', 'pug');
-app.use('/uploads', express.static('uploads'));
-app.use('/static', express.static('static'));
-app.use(cookieParser()); // 유저로부터받은 cookie이해를 위해
-app.use(bodyParser.json()); // 서버가 유저로부터 받은 데이터 이해를 위해
-app.use(bodyParser.urlencoded({
+app.use( helmet() );
+app.set( 'view engine', 'pug' );
+app.use( '/uploads', express.static( 'uploads' ) );
+app.use( '/static', express.static( 'static' ) );
+app.use( cookieParser() ); // 유저로부터받은 cookie이해를 위해
+app.use( bodyParser.json() ); // 서버가 유저로부터 받은 데이터 이해를 위해
+app.use( bodyParser.urlencoded( {
     extended: true
-})); // 서버가 유저로부터 받은 데이터 이해를 위해
-app.use(morgan('dev')); // logging 
+} ) ); // 서버가 유저로부터 받은 데이터 이해를 위해
+app.use( morgan( 'dev' ) ); // logging
 
-app.use(localMiddleware);
+app.use( localMiddleware );
 
-app.use(routes.home, globalRouter);
-app.use(routes.users, userRouter);
-app.use(routes.videos, videoRouter);
+app.use( routes.home, globalRouter );
+app.use( routes.users, userRouter );
+app.use( routes.videos, videoRouter );
 
 
 export default app;
