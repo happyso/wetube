@@ -3,40 +3,40 @@ import routes from '../routes';
 import User from '../models/User';
 
 export const getJoin = ( req, res ) => {
-    res.render( 'join', { pageTitle: 'join' } );
+  res.render( 'join', { pageTitle: 'Join' } );
 };
+
 export const postJoin = async( req, res, next ) => {
-    const { body: { name, email, password, password2 } } = req;
-    if ( password !== password2 ) {
-        res.status( 400 );
-        res.render( 'join', { pageTitle: 'join' } );
-    } else {
-        try {
-            const user = await User( {
-                name,
-                email
-            } );
-            await User.register( user, password );
-            next();
-        } catch ( error ) {
-            console.log( error );
-            res.redirect( routes.home );
-        }
-
+  const {
+    body: { name, email, password, password2 }
+  } = req;
+  if ( password !== password2 ) {
+    res.status( 400 );
+    res.render( 'join', { pageTitle: 'Join' } );
+  } else {
+    try {
+      const user = await User( {
+        name,
+        email
+      } );
+      await User.register( user, password );
+      next();
+    } catch ( error ) {
+      console.log( error );
+      res.redirect( routes.home );
     }
+  }
 };
 
+export const getLogin = ( req, res ) =>
+  res.render( 'login', { pageTitle: 'Log In' } );
 
-export const getLogin = ( req, res ) => {
-    res.render( 'login', { pageTitle: 'login' } );
-};
 export const postLogin = passport.authenticate( 'local', {
-    failureRedirect: routes.login,
-    successRedirect: routes.home
+  failureRedirect: routes.login,
+  successRedirect: routes.home
 } );
 
 export const githubLogin = passport.authenticate( 'github' );
-
 
 export const githubLoginCallback = async( _, __, profile, cb ) => {
   const {
@@ -62,7 +62,22 @@ export const githubLoginCallback = async( _, __, profile, cb ) => {
 };
 
 export const postGithubLogIn = ( req, res ) => {
-    res.redirect( routes.home );
+  res.redirect( routes.home );
+};
+
+export const facebookLogin = passport.authenticate( 'facebook' );
+
+export const facebookLoginCallback = (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  console.log( accessToken, refreshToken, profile, cb );
+};
+
+export const postFacebookLogin = ( req, res ) => {
+  res.redirect( routes.home );
 };
 
 export const logout = ( req, res ) => {
@@ -74,8 +89,17 @@ export const getMe = ( req, res ) => {
   res.render( 'userDetail', { pageTitle: 'User Detail', user: req.user } );
 };
 
-export const userDetail = ( req, res ) =>
-  res.render( 'userDetail', { pageTitle: 'User Detail' } );
+export const userDetail = async( req, res ) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const user = await User.findById( id );
+    res.render( 'userDetail', { pageTitle: 'User Detail', user } );
+  } catch ( error ) {
+    res.redirect( routes.home );
+  }
+};
 export const editProfile = ( req, res ) =>
   res.render( 'editProfile', { pageTitle: 'Edit Profile' } );
 export const changePassword = ( req, res ) =>
