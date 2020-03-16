@@ -4,6 +4,9 @@ import helmet from 'helmet'; // middleware 보안
 import cookieParser from 'cookie-parser'; // middleware
 import bodyParser from 'body-parser'; // middleware
 import passport from 'passport';
+import mongoose from 'mongoose';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import {
     localMiddleware
 } from './middlewares';
@@ -14,6 +17,7 @@ import routes from './routes';
 import './passport';
 
 const app = express();
+const CokieStore = MongoStore( session );
 
 app.use( helmet() );
 app.set( 'view engine', 'pug' );
@@ -24,7 +28,16 @@ app.use( bodyParser.json() ); // 서버가 유저로부터 받은 데이터 이�
 app.use( bodyParser.urlencoded( {
     extended: true
 } ) ); // 서버가 유저로부터 받은 데이터 이해를 위해
+
 app.use( morgan( 'dev' ) ); // logging
+app.use( session( {
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new CokieStore( {
+        mongooseConnection: mongoose.connection
+    } )
+} ) );
 app.use( passport.initialize() );
 app.use( passport.session() );
 
