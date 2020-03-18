@@ -21,7 +21,9 @@ function handleVolumeClick() {
   if ( videoPlayer.muted ) {
     videoPlayer.muted = false;
     volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volumeRange.value = videoPlayer.volume;
   } else {
+    volumeRange.value = 0;
     videoPlayer.muted = true;
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
@@ -88,6 +90,7 @@ function handleEnded() {
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
+
 function handleDrag( event ) {
   const {
     target: { value }
@@ -101,6 +104,7 @@ function handleDrag( event ) {
     volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
   }
 }
+
 function init() {
   videoPlayer.volume = 0.5;
   playBtn.addEventListener( 'click', handlePlayClick );
@@ -108,7 +112,7 @@ function init() {
   fullScrnBtn.addEventListener( 'click', goFullScreen );
   videoPlayer.addEventListener( 'loadedmetadata', setTotalTime );
   videoPlayer.addEventListener( 'ended', handleEnded );
-  volumeRange.addEventListener( 'ended', handleDrag );
+  volumeRange.addEventListener( 'input', handleDrag );
 }
 
 if ( videoContainer ) {
