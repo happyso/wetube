@@ -114,3 +114,21 @@ export const deleteVideo = async( req, res ) => {
   }
   res.redirect( routes.home );
 };
+
+//
+export const reqisterView = async( res, req ) => {
+  const {
+    parms: { id }
+  } = req;
+  try {
+    const video = await Video.findById( id );
+    video.views += 1;
+    video.save();
+    res.status( 200 );
+  } catch ( error ) {
+    res.status( 400 );
+    res.end();
+  } finally {
+    res.end();
+  }
+};
