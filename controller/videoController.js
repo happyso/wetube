@@ -115,8 +115,8 @@ export const deleteVideo = async( req, res ) => {
   res.redirect( routes.home );
 };
 
-//
-export const reqisterView = async( res, req ) => {
+// Reqister Video View
+export const postRegisterView = async( res, req ) => {
   const {
     parms: { id }
   } = req;
@@ -124,7 +124,7 @@ export const reqisterView = async( res, req ) => {
     const video = await Video.findById( id );
     video.views += 1;
     video.save();
-    res.status( 200 );
+    res.status( 200 );// okey
   } catch ( error ) {
     res.status( 400 );
     res.end();
