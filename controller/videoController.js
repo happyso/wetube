@@ -3,7 +3,6 @@ import Video from '../models/Video';
 import Comment from '../models/Comment';
 
 // Home
-
 export const home = async( req, res ) => {
   try {
     const videos = await Video.find( {} ).sort( { _id: -1 } );
@@ -13,6 +12,7 @@ export const home = async( req, res ) => {
     res.render( 'home', { pageTitle: 'Home', videos: [] } );
   }
 };
+
 
 // Search
 
