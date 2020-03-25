@@ -90,37 +90,55 @@ export const postAddComment = async( req, res ) => {
     res.end();
   }
 };
-
-// Edit Video
-
-export const getEditVideo = async( req, res ) => {
+//Delete Comment
+export const deleteComment = async( req, res ) => {
   const {
     params: { id }
   } = req;
   try {
-    const video = await Video.findById( id );
-    if ( video.creator !== req.user.id ) {
-      throw Error();
-    } else {
-      res.render( 'editVideo', { pageTitle: `Edit ${video.title}`, video } );
-    }
+    const comment = await Comment.findById( id );
+    console.log( comment );
+    // if ( video.creator !== req.user.id ) {
+    //   throw Error();
+    // } else {
+    //   await Video.findOneAndRemove( { _id: id } );
+    // }
   } catch ( error ) {
-    res.redirect( routes.home );
+    console.log( error );
   }
 };
 
-export const postEditVideo = async( req, res ) => {
+// Edit Video
+
+export const getEditVideo = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    if (String(video.creator) !== req.user.id) {
+      throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    }
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+export const postEditVideo = async (req, res) => {
   const {
     params: { id },
     body: { title, description }
   } = req;
   try {
-    await Video.findOneAndUpdate( { _id: id }, { title, description } );
-    res.redirect( routes.videoDetail( id ) );
-  } catch ( error ) {
-    res.redirect( routes.home );
+    await Video.findOneAndUpdate({ _id: id }, { title, description });
+    res.redirect(routes.videoDetail(id));
+  } catch (error) {
+    res.redirect(routes.home);
   }
 };
+
 
 // Delete Video
 
