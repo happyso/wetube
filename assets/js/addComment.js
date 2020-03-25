@@ -4,6 +4,7 @@ const addCommentForm = document.getElementById( 'jsAddComment' );
 const commentList = document.getElementById( 'jsCommentList' );
 const commentNumber = document.getElementById( 'jsCommentNumber' );
 const commentDelete = document.querySelector( '.jsCommentDelete' );
+const deleteId = document.querySelector( '.comment-delete_id' );
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt( commentNumber.innerHTML, 10 ) + 1;
@@ -33,16 +34,17 @@ const sendComment = async comment => {
   }
 };
 
-const deleteComment = async comment => {
+const deleteComment = async event => {
   const videoId = window.location.href.split( '/videos/' )[ 1 ];
-  const url = `/api/${videoId}/comment`;
-  try {
-    const response = await axios.get(url);
-    console.log(response);
-  } catch(error) {
-    // handle error
-    console.log(error);
-  };
+  const commendId = deleteId.dataset.id;
+  const response = await axios({
+    url: `/api/${videoId}/comment/${commendId}/delete`,
+    method: 'get',
+    commendId
+  });
+  if ( response.status === 200 ) {
+    console.log('it works!! ');
+  }
 };
 
 const handleSubmit = event => {
@@ -55,7 +57,10 @@ const handleSubmit = event => {
 
 function init() {
   addCommentForm.addEventListener( 'submit', handleSubmit );
-  commentDelete.addEventListener( 'click', deleteComment );
+  if(commentDelete){
+    commentDelete.addEventListener( 'click', deleteComment );
+  }
+  
 }
 
 if ( addCommentForm ) {
