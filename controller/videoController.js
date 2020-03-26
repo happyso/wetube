@@ -154,6 +154,7 @@ export const postAddComment = async( req, res ) => {
     } );
     video.comments.push( newComment.id );
     video.save();
+    res.send(JSON.stringify(newComment));
   } catch ( error ) {
     res.status( 400 );
   } finally {
@@ -174,10 +175,12 @@ export const deleteComment = async( req, res ) => {
       throw Error();
     } else {
       await Comment.findOneAndRemove({ _id: commentId });
+      res.status(200);
     }
   } catch ( error ) {
+    res.status( 400 );
     console.log( error );
-    res.redirect( routes.videoDetail( id ) );
   }
+  res.redirect( routes.videoDetail( id ) );
 
 };
