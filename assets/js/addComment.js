@@ -4,10 +4,14 @@ const addCommentForm = document.getElementById( 'jsAddComment' );
 const commentList = document.getElementById( 'jsCommentList' );
 const commentNumber = document.getElementById( 'jsCommentNumber' );
 const commentDelete = document.querySelector( '.jsCommentDelete' );
-const deleteId = document.querySelector( '.comment-delete_id' );
+const deleteId = document.querySelector( '.jsCommentDeleteId' );
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt( commentNumber.innerHTML, 10 ) + 1;
+};
+
+const decreaseNumber = () => {
+  commentNumber.innerHTML = parseInt( commentNumber.innerHTML, 10 ) - 1;
 };
 
 const addComment = comment => {
@@ -17,6 +21,11 @@ const addComment = comment => {
   li.appendChild( span );
   commentList.prepend( li );
   increaseNumber();
+};
+
+const removeComment = comment => {
+  console.log(comment.target);
+  decreaseNumber();
 };
 
 const sendComment = async comment => {
@@ -34,7 +43,7 @@ const sendComment = async comment => {
   }
 };
 
-const deleteComment = async event => {
+const deleteComment = async comment => {
   const videoId = window.location.href.split( '/videos/' )[ 1 ];
   const commendId = deleteId.dataset.id;
   const response = await axios({
@@ -43,6 +52,7 @@ const deleteComment = async event => {
     commendId
   });
   if ( response.status === 200 ) {
+    removeComment(comment);
     console.log('it works!! ');
   }
 };
