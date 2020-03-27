@@ -120,7 +120,7 @@ export const deleteVideo = async (req, res) => {
 };
 
 
-// Register Video View (조회수)
+// Register Video View
 
 export const postRegisterView = async (req, res) => {
   const {
