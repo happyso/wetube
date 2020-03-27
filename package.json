@@ -54,7 +54,6 @@
         "prestart": "npm run build"
     },
     "devDependencies": {
-        "@babel/cli": "^7.8.4",
         "nodemon": "^2.0.2"
     },
     "browserslist": {
