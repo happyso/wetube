@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 mongooes.connect(
-    process.env.MONGO_URL,
+    process.env.MONGO_URL_PROD,
     {
     useNewUrlParser: true,
     useFindAndModify: false
